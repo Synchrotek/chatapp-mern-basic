@@ -7,8 +7,8 @@ function App() {
   return (
     <div className='backgroundWallpaper p-4 h-screen flex items-center justify-center'>
       {/* <Login /> */}
-      <SignUp />
-      {/* <Home /> */}
+      {/* <SignUp /> */}
+      <Home />
     </div>
   )
 }
