@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 dotenv.config();
 const { connectToMongoDB } = require('./db/connectToDb.js');
 
@@ -9,6 +10,9 @@ const app = express();
 // Middlewares -----------------
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: process.env.CLIENT_URL
+}));
 
 // Use routes ------------------
 const authRoutes = require('./routes/auth.routes.js');

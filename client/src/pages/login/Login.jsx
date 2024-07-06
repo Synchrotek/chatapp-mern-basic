@@ -1,5 +1,6 @@
 import React from 'react'
 import GlassWrapper from '../../components/GlassWrapper'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
     return (<GlassWrapper>
@@ -26,9 +27,9 @@ const Login = () => {
                     className='w-full input input-bordered h-10'
                 />
             </div>
-            <a href="#" className='text-sm m-1 hover:text-blue-50 inline-block'>
+            <Link to="/signup" className='text-sm m-1 hover:text-blue-50 inline-block'>
                 {"Don't"} have an account?
-            </a>
+            </Link>
             <div><button
                 className='btn btn-success btn-block'
             >Login</button>
