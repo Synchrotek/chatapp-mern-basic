@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthContext";
 
 const useSignup = () => {
     const [loading, setLoading] = useState(false);
+    const { setAuthUser } = useContext(AuthContext);
     const signup = async (inputs) => {
         // const { fullname, email, password, ConfirmPassword, gender } = inputs;
         const success = handleInputErrors(inputs);
@@ -20,7 +22,8 @@ const useSignup = () => {
                 throw new Error(data.error);
             }
             // localstorage
-            // context
+            localStorage.setItem('chat-user', JSON.stringify(data));
+            setAuthUser(data)
         } catch (error) {
             toast.error(error.message)
         } finally {
@@ -43,7 +46,7 @@ const handleInputErrors = (inputs) => {
         return false;
     }
     if (inputs.password.length < 6) {
-        toast.error("Passwords must e at least 6 characters.");
+        toast.error("Passwords must be at least 6 characters.");
         return false;
     }
     return true;

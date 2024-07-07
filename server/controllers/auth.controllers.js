@@ -8,7 +8,7 @@ exports.Singup = async (req, res) => {
             fullName, email, password, confirmPassword, gender
         } = req.body;
 
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
             return res.status(400).json({
                 success: false,
                 error: "Password don't match"
