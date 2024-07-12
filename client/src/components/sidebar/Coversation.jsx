@@ -1,21 +1,31 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import useConversation from '../../store/useConversation';
 
-const Coversation = () => {
+const Coversation = ({
+    conversation, emoji, lastIdx
+}) => {
+    const { selectedConversation, setSelectedConversation } = useConversation();
+    const isSelected = selectedConversation?._id === conversation._id;
     return (<>
-        <div className='flex gap-2 items-center hover:bg-orange-500 bg-opacity-10 rounded p-2 py-1 cursor-pointer'>
+        <div className={`flex gap-2 items-center hover:bg-orange-500 bg-opacity-55 rounded p-2 py-1 
+        cursor-pointer ${isSelected && 'bg-orange-500'}`}
+            onClick={() => setSelectedConversation(conversation)}
+        >
             <div className='avatar online'>
                 <div className='w-12 rounded-full'>
-                    <img src="https://i.pinimg.com/564x/7f/21/c9/7f21c92a6baf5e0ff9c87b3baba8e78f.jpg" alt="user avatar" />
+                    <img src={conversation.profilePic} alt="user avatar" />
                 </div>
             </div>
             <div className='flex flex-col flex-1'>
                 <div className='flex gap-3 justify-between'>
-                    <p className='font-bold text-gray-200'>Jhon Doe</p>
-                    <span className='text-xl'>🚀</span>
+                    <p className='font-bold text-gray-200'>{conversation.fullName}</p>
+                    <span className='text-xl'>{emoji}</span>
                 </div>
             </div>
         </div>
-        <div className='divider my-0 py-0 h-1' />
+        {!lastIdx &&
+            <div className='divider my-0 py-0 h-1' />
+        }
     </>
     )
 }

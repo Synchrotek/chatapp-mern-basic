@@ -1,16 +1,27 @@
 import React from 'react'
+import { useAuthContext } from '../../context/AuthContext'
+import useConversation from '../../store/useConversation';
 
-const Message = () => {
+const Message = ({ message }) => {
+    const { authUser } = useAuthContext();
+    const { selectedConversation } = useConversation();
+    const fromMe = message.senderId === authUser._id;
+
+    console.log("message:", message);
+
+    const chatClassName = fromMe ? 'chat-start' : 'chat-end';
+    const profilePic = fromMe ? authUser.profilePic : selectedConversation.profilePic;
+
     return (
-        <div className='chat chat-end'>
+        <div className={`chat ${chatClassName}`}>
             <div className='chat-image avatar'>
                 <div className='w-10 rounded-full'>
-                    <img src="https://i.pinimg.com/564x/7f/21/c9/7f21c92a6baf5e0ff9c87b3baba8e78f.jpg" alt="sender"
+                    <img src={profilePic} alt="sender"
                     />
                 </div>
             </div>
             <div className={`chat-bubble text-white bg-blue-800`}>
-                Hi, there
+                {message.message}
             </div>
             <div className='chat-footer opacity-65 text-xs flex gap-1 items-center'>
                 12:42

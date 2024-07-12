@@ -6,7 +6,7 @@ const useSignup = () => {
     const [loading, setLoading] = useState(false);
     const { setAuthUser } = useContext(AuthContext);
     const signup = async (inputs) => {
-        // const { fullname, email, password, ConfirmPassword, gender } = inputs;
+        // const { fullname, email, password, confirmPassword, gender } = inputs;
         const success = handleInputErrors(inputs);
         if (!success) return;
         setLoading(true);
@@ -35,13 +35,13 @@ const useSignup = () => {
 
 const handleInputErrors = (inputs) => {
     if (
-        !inputs.fullname || !inputs.email || !inputs.gender ||
-        !inputs.password || !inputs.ConfirmPassword
+        !inputs.fullName || !inputs.email || !inputs.gender ||
+        !inputs.password || !inputs.confirmPassword
     ) {
         toast.error("Please provide valid values.");
         return false;
     }
-    if (inputs.password !== inputs.ConfirmPassword) {
+    if (inputs.password !== inputs.confirmPassword) {
         toast.error("Passwords do not match.");
         return false;
     }

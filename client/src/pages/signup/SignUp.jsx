@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import GlassWrapper from '../../components/GlassWrapper'
 import GenderCheckbox from './GenderCheckbox'
 import { Link } from 'react-router-dom'
@@ -6,10 +6,10 @@ import useSignup from '../../hooks/useSignup'
 
 const SignUp = () => {
     const [inputs, setInputs] = useState({
-        fullname: '',
+        fullName: '',
         email: '',
         password: '',
-        ConfirmPassword: '',
+        confirmPassword: '',
         gender: ''
     });
 
@@ -19,7 +19,7 @@ const SignUp = () => {
         setInputs({ ...inputs, gender });
     };
 
-    const handleSignuSubmit = async (e) => {
+    const handleSignupSubmit = async (e) => {
         e.preventDefault();
         console.log("inputs: ", inputs);
         await signup(inputs);
@@ -32,7 +32,7 @@ const SignUp = () => {
                 <span className='text-blue-500 ml-2'>ChatApp</span>
             </h1>
         </div>
-        <form onSubmit={handleSignuSubmit}>
+        <form onSubmit={handleSignupSubmit}>
             <div className='my-2'>
                 <label className='label p-2 text-base label-text'>
                     Full name :
@@ -40,8 +40,8 @@ const SignUp = () => {
                 <input type="text"
                     placeholder='Enter Full name'
                     className='w-full input input-bordered h-10'
-                    value={inputs.fullname}
-                    onChange={e => setInputs({ ...inputs, fullname: e.target.value })}
+                    value={inputs.fullName}
+                    onChange={e => setInputs({ ...inputs, fullName: e.target.value })}
                 />
                 <label className='label p-2 text-base label-text'>
                     Email :
@@ -67,8 +67,8 @@ const SignUp = () => {
                 <input type="password"
                     placeholder='Retype your password'
                     className='w-full input input-bordered h-10'
-                    value={inputs.ConfirmPassword}
-                    onChange={e => setInputs({ ...inputs, ConfirmPassword: e.target.value })}
+                    value={inputs.confirmPassword}
+                    onChange={e => setInputs({ ...inputs, confirmPassword: e.target.value })}
                 />
             </div>
 
@@ -82,7 +82,11 @@ const SignUp = () => {
             </Link>
             <div><button
                 className='btn btn-success btn-block'
-            >Signup</button>
+            >
+                {loading ?
+                    <span className='loading loading-spinner'></span> : "Sign up"
+                }
+            </button>
             </div>
         </form>
     </GlassWrapper>

@@ -1,11 +1,18 @@
-import React from 'react'
+import { useEffect } from 'react'
 import Messages from './Messages'
 import MessageInput from './MessageInput'
 import NoChatSelected from './NoChatSelected';
+import useConversation from '../../store/useConversation';
 
 const MessageContainer = () => {
-    const noChatSelected = true;
-    if (noChatSelected) {
+    const { selectedConversation, setSelectedConversation } = useConversation();
+
+    useEffect(() => {
+        // cleanup function when unmounting
+        return () => setSelectedConversation(null)
+    }, [setSelectedConversation]);
+
+    if (!selectedConversation) {
         return <NoChatSelected />
     }
 
@@ -14,7 +21,7 @@ const MessageContainer = () => {
             {/* Header */}
             <div className='bg-slate-500 px-4 py-2 mb-4'>
                 <span className='label-text'>To:</span>
-                <span className='text-gray-900 font-bold'>Jhon Doe</span>
+                <span className='text-gray-900 font-bold'>{selectedConversation.fullName}</span>
             </div>
 
             <Messages />
