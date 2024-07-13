@@ -1,6 +1,6 @@
-import React from 'react'
 import { useAuthContext } from '../../context/AuthContext'
 import useConversation from '../../store/useConversation';
+import { extractTime } from '../../utils/extractTime';
 
 const Message = ({ message }) => {
     const { authUser } = useAuthContext();
@@ -24,7 +24,7 @@ const Message = ({ message }) => {
                 {message.message}
             </div>
             <div className='chat-footer opacity-65 text-xs flex gap-1 items-center'>
-                12:42
+                {extractTime(message.createdAt)}
             </div>
         </div>
     )
