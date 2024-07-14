@@ -3,6 +3,7 @@ const padZero = (number) => {
 }
 
 export const extractTime = (dateString) => {
+    if (!dateString) return "";
     const date = new Date(dateString);
     const hours = padZero(date.getHours());
     const minutes = padZero(date.getMinutes());

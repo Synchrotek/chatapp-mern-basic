@@ -1,11 +1,10 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-dotenv.config();
-const { connectToMongoDB } = require('./db/connectToDb.js');
+require('dotenv').config();
 
-const app = express();
+const { connectToMongoDB } = require('./db/connectToDb.js');
+const { app, server } = require('./socket/socket.js');
 
 // Middlewares -----------------
 app.use(express.json());
@@ -24,11 +23,11 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
-    res.send("Hello world!")
+    res.send("Server is working!");
 });
 
 const PORT = process.env.PORT || 4500;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     connectToMongoDB();
     console.log(`Server running on PORT: ${PORT}`);
 })

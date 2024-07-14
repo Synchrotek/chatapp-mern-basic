@@ -9,7 +9,7 @@ const Message = ({ message }) => {
 
     console.log("message:", message);
 
-    const chatClassName = fromMe ? 'chat-start' : 'chat-end';
+    const chatClassName = fromMe ? 'chat-end' : 'chat-start';
     const profilePic = fromMe ? authUser.profilePic : selectedConversation.profilePic;
 
     return (
@@ -20,7 +20,7 @@ const Message = ({ message }) => {
                     />
                 </div>
             </div>
-            <div className={`chat-bubble text-white bg-blue-800`}>
+            <div className={`chat-bubble text-white ${fromMe ? 'bg-[#C80036]' : 'bg-[#071952]'}`}>
                 {message.message}
             </div>
             <div className='chat-footer opacity-65 text-xs flex gap-1 items-center'>
