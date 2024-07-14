@@ -8,8 +8,7 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
     const userConfirm = JSON.parse(localStorage.getItem("chat-user"));
-    const [authUser, setAuthUser] = useState(userConfirm.data || null);
-    console.log("authUser:::::::", authUser);
+    const [authUser, setAuthUser] = useState(userConfirm?.data || null);
     return <AuthContext.Provider value={{
         authUser, setAuthUser
     }}>{children}
